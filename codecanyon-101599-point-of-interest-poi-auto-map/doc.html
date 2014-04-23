@@ -1,0 +1,492 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>POI Auto Map v5.2 Documentation</title>
+<style type="text/css" media="screen">
+body {
+	color: #333;
+	background: #eee;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	text-transform: normal;
+	letter-spacing: -1px;
+	line-height: 1.3em;
+	padding: 10px;
+}
+p, table, hr, .box {
+	margin-bottom:25px;
+}
+.box p {
+	margin-bottom:10px;
+}
+pre {
+	background: #fff;
+	border: 1px solid #ccc;
+	margin-left: 20px;
+	padding: 4px
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h3 class="center alt">&ldquo;POI Auto Map&rdquo; Documentation by &ldquo;Gavin
+    Smith&rdquo; v5.2</h3>
+  <hr>
+  <h1 class="center">&ldquo;POI Auto Map v5.2.5&rdquo;</h1>
+  <div class="borderTop">
+    <div class="span-6 colborder info prepend-1">
+      <p class="prepend-top"> <strong> Created: 24 October 2013<br>
+        By: Gavin Smith<br>
+        Email: <a href="mailto:support@teeplates.com">mailto:support@teeplates.com</a> </strong> </p>
+    </div>
+    <!-- end div .span-6 -->
+    <div class="span-12 last">
+      <p class="prepend-top append-0">Thank you for purchasing POI Automap. If you have any questions that are beyond the scope of this help
+        file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/gbsmith71">here</a>.
+        Thanks so much!</p>
+    </div>
+  </div>
+  <!-- end div .borderTop -->
+  <hr>
+  <h2 id="toc" class="alt">Table of Contents</h2>
+  <ol class="alpha">
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#requirements">System Requirements</a></li>
+      <ol class="alpha">
+        <li><a href="#places">Google Places API</a></li>
+      </ol>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a>
+      <ol class="alpha">
+        <li><a href="#config">Javascript Configuration</a></li>
+        <li><a href="#head">&lt;HEAD&gt; Tags</a></li>
+        <li><a href="#html">Required HTML</a></li>
+      </ol>
+    </li>
+    <li><a href="#categories">POI Category Setup</a></li>
+    <li><a href="#markers">Marker Setup</a></li>
+    <li><a href="#print">Printable Driving Directions</li>
+    <li><a href="#database">Database Connector</a>
+      <ol>
+        <li><a href="#dbsetup">Connector Setup</a></li>
+        <li><a href="#dbstructure">Database Structure</a></li>
+        <li><a href="#dbhtml">Category HTML</a></li>
+        <li><a href="#geo">Batch Geocoding</a></li>
+        <li><a href="#csv">Database Import / Export (CSV)</a></li>
+      </ol>
+    </li>
+  </ol>
+  <hr>
+  <h3 id="introduction"><strong>1) Introduction - What is POI Auto Map</strong> - <a href="#toc">top</a></h3>
+  <p>Poi Auto Map combines the power of Google's Maps and Places APIs to give
+    you a simple way to add highly interactive Point of Interest maps to your
+    website. All you need to do is define a starting address and a list of point
+    of interest categories and POI Auto Map does the rest. Move the map and watch
+    the points update. You can also define a database connection from which to
+    source your POI points.</p>
+  <p>Version 5.0 has been rewritten to use Google Maps API V3 with Google Places API.</p>
+  <p>The following new features have been included in version 5.0:</p>
+  <ul>
+    <li>5.2.5 - Additional Features
+      <ul>
+        <li>Database Import / Export Using CSV file format - download &amp; edit your databse records</li>
+        <li>Place Search Now includes auto complete</li>
+        <li>Automatic Menu CSS creation based on categories</li>
+        <li>Better feedback for zero results from places API</li>
+        <li>Minor Interface Improvements</li>
+      </ul>
+    </li>
+    <li>5.2 - Additional Features
+      <ul>
+        <li>Option to include Google Places Photo in InfoWindow (Marker Bubble)</li>
+        <li>Option to include Google Places Ratings in InfoWindow (Marker Bubble)</li>
+        <li>Improved InfoWindow Linking
+          <ul>
+            <li>POI title now links to the poi's website if they have one (instead of Google Places page)</li>
+          </ul>
+        </li>
+        <li>Minor Interface Improvements</li>
+      </ul>
+    </li>
+    <li>5.1 - Additional Features</li>
+    <ul>
+      <li>language / Region Selection        </li>
+      <li>Directions Mode Selection</li>
+      <li>Interface enhancements</li>
+    </ul>
+    <li>5.0 Improvements
+      <ul>
+        <li>Google Places Integration
+          <ul>
+            <li>Access Google Place Information</li>
+            <li>Use <a href="http://code.google.com/apis/maps/documentation/places/supported_types.html">Google Places Types</a> </li>
+            <li>Combine Types with search by name for more granular results.</li>
+            <li>Returns multiple results limited only by search radius setting.</li>
+            <li>Uses JSON result set for best performance</li>
+            <li>Can use Googles POI icons for places locations</li>
+          </ul>
+        </li>
+        <li>Geolocation - Location Aware
+          <ul>
+            <li>Automatically find your current location</li>
+            <li>Ideal for Mobile Applications</li>
+          </ul>
+        </li>
+        <li>External Info Window
+          <ul>
+            <li>Have infowindow content be shown in an external DIV instead on the standard info window bubble</li>
+          </ul>
+        </li>
+        <li>Database Performance
+          <ul>
+            <li>Database records are now returned as JSON.</li>
+            <li>Significantly faster for large record sets.</li>
+          </ul>
+        </li>
+        <li>Removed Items
+          <ul>
+            <li>Panoramio and Wikipedia Layers</li>
+            <li>XML File Processing</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>The following new features have been included in version 4.0:</p>
+  <ul>
+    <li>Google Maps API v3
+      <ul>
+        <li>Completely re-written for Google Maps API v3</li>
+      </ul>
+    </li>
+  </ul>
+	<p>The following new features have been included in version 3.0:</p>
+  <ul>
+    <li>Database connector
+      <ul>
+        <li>Add Markers to the map from your own database</li>
+        <li>Assign custom marker icons to each group or each individual point</li>
+        <li>Add your own custom HTML to the marker point's popup</li>
+        <li>Street View and Driving Directions Included</li>
+        <li>Only markers from the database that are on the current map area are
+          loaded - better speed.</li>
+        <li>Bulk Geocoding tool included - convert addresses to latitude, longitude
+          pairs</li>
+      </ul>
+    </li>
+    <li>User Printable Street Directions
+      <ul>
+        <li>Customize what gets printed with your own logo</li>
+      </ul>
+    </li>
+  </ul>
+  <p>With the release of version 2.0, users can also:</p>
+  <ul>
+    <li>Go to any location in the world by entering and address</li>
+    <li>See Street View images of the POIs</li>
+    <li>Get Street Directions</li>
+    <li>View User Submitted photos in the area</li>
+    <li>View Wikipedia articles in the area</li>
+    <li>Add their own category with the search bar.</li>
+    <li>You can also add a group of markers from an XML file.</li>
+  </ul>
+  <hr>
+  <h3 id="requirements"><strong>2) System Requirements</strong> - <a href="#toc">top</a></h3>
+  <p> POI Auto Map is a Javascript script that runs mainly within the browser, as well as some basic PHP for database and Places processing. It has only been tested in LAMP environments, however it may be possible to use in other environments as long as PHP / cURL is available.
+ </p>
+  <p>You need to add a &lt;script&gt; tag to link to Google Maps API V3: </p>
+  <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;http://maps.google.com/maps/api/js?sensor=false&quot;&gt;&lt;/script&gt;  </pre>
+  <p>You need to add a &lt;script&gt; tag to link to Jquery: </p>
+  <pre>&lt;script src=&quot;http://code.jquery.com/jquery.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;  </pre>
+<h4>The included index.html should be referred to to see all required script
+    tags.</h4>
+  <h3 id="places"><strong>2.1) Google Places API</strong> - <a href="#toc">top</a></h3>
+      <p>In order to utilize Google Places Data, you will need to sign up for a Google Places API Key by following the instructions here: <a href="http://code.google.com/apis/maps/documentation/places/#Authentication">http://code.google.com/apis/maps/documentation/places/#Authentication</a></p>
+  <p>Your API Key needs to be added to the /db/jsonproxy.php file:</p>
+        <pre>$api_key = &quot;your-key-goes-here&quot;;</pre>
+
+  <h4>Marker Icons</h4>
+  <p>You will need to provide an indivudual <strong>png</strong> icon for each
+    category. You can make your own, purchase one from envato such as this - <a href="http://graphicriver.net/item/map-marker-mega-pack-66-icons/86505">http://graphicriver.net/item/map-marker-mega-pack-66-icons/86505</a> ,
+    or download a free icon library such as the one used in the demo from here: <a href="http://mapicons.nicolasmollet.com">http://mapicons.nicolasmollet.com</a></p>
+  <hr>
+  <h3 id="installation"><strong>3) Installation</strong> - <a href="#toc">top</a></h3>
+  <p>Copy the contents of the zip file to a directory off the root of your site.
+    You should have the following directories:</p>
+  <ul>
+    <li><strong>css</strong> - contains the default styling for the demo
+      <ul>
+        <li><strong>images</strong> - contains images used in the demo</li>
+      </ul>
+    </li>
+    <li><strong>icons</strong> - Empty (Put your marker Icons here)</li>
+    <li><strong>js</strong> - Contains the main poi.js file</li>
+    <li><strong>demo</strong> - contains demo files used in the index.html demo.</li>
+    <li><strong>images</strong> - content images used in the demo</li>
+    <li><strong>print</strong> - files used for printable Driving Directions</li>
+    <li><strong>db</strong> - files used for database connector, bulk geocoding and json proxying (Google Places)</li>
+  </ul>
+  <p>&nbsp;</p>
+  <hr>
+  <h3 id="usage"><strong>4) Usage</strong> - <a href="#toc">top</a></h3>
+  <p>POI Auto Map is driven by some simple HTML and Javascript the index.html
+    file is a good example of the code required.</p>
+  <h4 id="config"><strong>4.1 Javascript Configuration</strong> - <a href="#toc">top</a></h4>
+  <p>The following configuration items are required to be made in the poi.js
+    file to configure your POI Auto Map install.</p>
+  <pre>
+  // Map Configuration
+	var <strong>defaultAddress</strong> = &quot;111 Main St, Smithtown, State&quot;;<em><strong> - Starting Address for initial display and Main Marker</strong></em>
+	var <strong>defaultHTML</strong> = &quot;&lt;strong>Baloon Content&lt;/strong>&quot;; <em><strong> - HTML Content to be displayed in Main Marker popup </strong></em>
+	var <strong>infoHTML</strong> = &quot;&lt;h4&gt;Help to use this&lt;/h4&gt;&quot;; <em><strong>- HTML Content to be displayed in Main Marker popup </strong></em>
+	var <strong>defaultZoomLevel</strong> = 16;<em><strong> - Initial Zoom Level of map, Larger Number = Higher Zoom
+</strong></em>	var <strong>searchControls</strong> = true;<em><strong>- Display the search for an address nar true / false</strong></em><br>	var <strong>mapDivID</strong> = &quot;map&quot;; <em><strong>- the defult div ID to use for the map</strong></em><br>	var <strong>categoriesList</strong> = &quot;poiList&quot;; <em><strong>- the ID of the Unirdered list (UL) to source categories from</strong></em><strong></strong><br>  var directionsMode = 'DRIVING'; - change to 'walking' WALKING for walking directions<br>  var infoWindowDivID = &quot;&quot;; - The ID of a div that can be used instead of the standard infoWindow bubble<br>
+  // Display Photos In Info Window - Make Sure You Add Your Google Places API Key to db/imageproxy.php<br>  var showPhotos = true; <br>  var maxPhotoWidth = 150; <br>  // Display Google Places Rating<br>  var showRating = true; 
+
+  // Geolocation features<br>  var useGeolocation = false;  - Enable geolocation for browsers that support it. <br>  var autoGeolocation = false; - Send geolocation able browsers to their current location by default<br>
+  // Database Bounds Search Extension<br>  var extendLat = 0.05; - Boundary extension for database searches. Distance outside visible map.<br>  var extendLng = 0.005;<br>	var dbPath = &quot;db/&quot;; - Path to the db.php and jsonproxy.php
+
+  // Places Search Radius (metres)<br>  var searchRadius = 2000; - distance in metres from main marker to search places api<br>
+  // Main Marker Configuration 
+	var <strong>mainIconWidth</strong> = 43; <em><strong>- Width of Main Point Icon Marker</strong></em>
+	var <strong>mainIconHeight</strong> = 50; <em><strong>- Height of Main Point Icon Marker</strong></em>
+	var <strong>mainAnchorPointX</strong> = 17; <em><strong>- Horizontal Point of the Main Marker Icon to use as attachment point</strong></em>
+	var <strong>mainAnchorPointY</strong> = 49; <em><strong>- Vertical Point of the Main Marker Icon to use as attachment point</strong></em>
+
+	// Icon Configuration
+	var <strong>iconPath</strong> = "/icons/";<em><strong> - Relative Path to the Icons Directory</strong></em>
+	var <strong>iconWidth</strong> = 32; <em><strong>- Width of POI Icon Markers</strong></em>
+	var <strong>iconHeight</strong> = 37; <em><strong>- Height of POI Icon Markers</strong></em>
+	var <strong>anchorPointX</strong> = 16; <em><strong>- Horizontal Point of the Marker Icon to use as attachment point</strong></em>
+	var <strong>anchorPointY</strong> = 34; <em><strong>- Vertical Point of the Marker Icon to use as attachment point</strong></em><strong></strong>
+	var iconScaleWidth = 24; - width to display icons<br>	var iconScaleHeight = 24; - height to display icons<br>	var useGoogleIcon = false; - Use Googles icons built in to the Places API<br>
+  </pre>
+  <h4 id="head"><strong>4.2 &lt; Head Tags&gt;</strong> - <a href="#toc">top</a> </h4>
+  <p>The following items must be placed in the &lt;head&gt; area of your page:</p>
+  <blockquote>
+    <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;http://maps.google.com/maps/api/js?sensor=false&quot;&gt;&lt;/script&gt;<br>&lt;script src=&quot;http://code.jquery.com/jquery.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>&lt;script src=&quot;js/poi.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; </pre>
+  </blockquote>
+  <p>You can also link to the default CSS Style sheet in the &lt;head&gt;:</p>
+  <blockquote>
+    <pre>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/style.css&quot;/&gt;</pre>
+  </blockquote>
+  <h4 id="html"><strong>4.3 Page Level Configuration</strong> - <a href="#toc">top</a></h4>
+  <p>Some uses of POI Auto Maps may require that each page has different location,
+    balloon HTML and zoomlevel. This can be acheved by adding the following before
+    the po.js script tags:</p>
+  <blockquote>
+    <pre>&lt;script type=&quot;text/javascript&quot;&gt;<br>var poiAddress = &quot;Glendale Rd, Briar Hill, Vic&quot;;<br>var poiHTML = 'Briar Hill, Vic';<br>var poiZoomLevel = 15;<br>&lt;/script&gt;</pre>
+  </blockquote>
+  <h4><strong>4.4 HTML Setup</strong> - <a href="#toc">top</a> </h4>
+  <p>For your Auto POI Map to work, you need to add some HTML to the &lt;body&gt; of
+    your page. At a minimum, you must have the following:</p>
+  <blockquote>
+    <pre>&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+&lt;ul id=&quot;poiList&quot;&gt;<br>	  &lt;li class=&quot;hidden&quot; data-title=&quot;establishment&quot; id=&quot;shoe_store&quot; name=&quot;shoes&quot;&gt;Shoe Stores&lt;/li&gt;
+&lt;/ul&gt;	</pre>
+  </blockquote>
+  <p>The map div is the container where the map will be rendered.</p>
+  <p>The poiList <strong>ul</strong> and its child <strong>li's</strong> define
+    the list of POI categories - <a href="#categories">click for more info</a>.
+    You can add as many child li's as you wish to have categories.</p>
+  <p><strong>You should refer to the index.html for a full, styled example.</strong></p>
+  <hr>
+  <h3 id="categories"><strong>5) POI Category Setup</strong> - <a href="#toc">top</a></h3>
+  <p>The POI categories displayed on your maps are determined by the li items
+    in the poiList UL (<a href="#html">click for more info</a>) :</p>
+  <pre>&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+&lt;ul id=&quot;poiList&quot;&gt;<br>	  &lt;li class=&quot;hidden&quot; data-title=&quot;establishment&quot; id=&quot;shoe_store&quot; name=&quot;shoes&quot;&gt;Shoe Stores&lt;/li&gt;
+	  &lt;li data-title=&quot;police&quot; id=&quot;police&quot;&gt;Police&lt;/li&gt;
+&lt;/ul&gt;	</pre>
+  <p>Each li needs the following parameters to create the markers:</p>
+  <ul>
+    <li><strong><em>title </em></strong><em>(required)</em> - This is the supported Places API type that will be searched for to find this categories points of interest.
+      This must be one of the supported types in this list   <a href="http://code.google.com/apis/maps/documentation/places/supported_types.html">http://code.google.com/apis/maps/documentation/places/supported_types.html</a></li>
+    <li><strong><em>id </em></strong><em>(required)</em> - The unique identifier
+      for this category. Must be unique. This also defines the marker icon to
+      be used (<a href="#markers">click for more info</a>)</li>
+    <li><strong><em>class </em></strong><em>(optional)</em> - This defines whether
+      this categories POI markers are shown when the map is loaded. Leave blank
+      or omit to have the markers shown on load.</li>
+    <li><strong><em>name </em></strong><em>(optional)</em> - A term to be matched against the names of Places. Results will be restricted to those containing the passed name value. When a name is included, the area being searched may be broadened, to ensure a suitable number of results.</li>
+  </ul>
+  <h3>5.1) Category Search Box - <a href="#toc">top</a></h3>
+  <p>You can also add an item to your unordered list that defines where the user
+    defined category search box will be placed.</p>
+  <pre> &lt;li data-title=&quot;&quot; id=&quot;user&quot;&gt;Search&lt;/li&gt;</pre>
+  <p>This should be added as above with no alteration. <em>You will need to provide
+      a <strong>user.png</strong> file in the icons directory for use as the
+      Pin for this category.</em></p>
+  <hr>
+  <h3 id="markers"><strong>6) Marker Icons Configuration</strong> - <a href="#toc">top</a></h3>
+  <h4>Poi Markers</h4>
+  <p>Each POI category requires its own <strong>png</strong> format icon to use
+    as a marker on the map. Each png file must be named the same as the ID tag
+    for each category. eg</p>
+  <pre> &lt;li class=&quot;hidden&quot; data-title=&quot;police&quot; id=&quot;<strong>police</strong>&quot; &gt;Police Stations&lt;/li&gt; 
+</pre>
+  <p>You must have a corresponding <strong>police.png</strong> file in the icons
+    directory.</p>
+  <p>You can also add a <strong><em>category-shadow.png</em></strong> file in
+    the icons directory. eg for the example above, you would provide a police-shadow.png
+    file in the icons directory.</p>
+  <p>You need to define the size and anchor of the icons used in the javascript
+    config. All marker icons must be the same size.</p>
+  <h4>Main Marker Icon</h4>
+  <p>You can provide a png file to use as the main marker that is used to mark
+    the initial address. This file must be named <em><strong>pin.png</strong></em>.
+    You can also provide a <em><strong>pin-shadow.png</strong></em> file to use
+    as the markers shadow. If you do not provide a pin.png, no marker will be
+    added to the map.</p>
+  <p>You need to define the size and anchor of the main icon used in the javascript
+    config. This can be a different size to the POI category marker icons..</p>
+  <h4>Additional Marker Icons - special features</h4>
+  <p>If you decide to use the folowing features, you will need to provide additional
+    icon images:</p>
+  <ul>
+    <li>User Defined categories search - requires <em><strong>user.png</strong></em> file</li>
+  </ul>
+  <hr>
+  <h3 id="print"><strong>7) Printable Driving Directions</strong> - <a href="#toc">top</a></h3>
+  <p>When viewing the driving directions popup, the visitor can now click the
+    print icon at the top left to print a map and directions list. You can customize the
+    header of the page that gets printed by editing the <strong>print/print.html</strong> page.</p>
+  <hr>
+  <h3 id="database"><strong>8) Database Connector</strong> - <a href="#toc">top</a></h3>
+  <p>POI Auto Maps now includes a database connector so that you can add POI
+    markers from your own database, as well as Google Search results.The database
+    used can be anexisting mySWL database that you are using or it can be one
+    that you create solely for this purpose. There is no tool included in this
+    package for adding / editing database data. You can create a demo database
+    by using the db/poi.sql file to create it.</p>
+  <p><em>You must be running PHP 5.1 or better and be using mySQL. You also must
+      have PHP PDO installed on your server.</em></p>
+<h4 id="dbsetup">8.1 - Database Connector Setup</h4>
+  <p>In order to use the database connector, you will need to open and edit the <strong>db/db.config.php</strong> file
+    with your information (edit the areas in bold, inside the quotaion marks):</p>
+  <pre>'hostname'	=&gt;	<strong>'localhost'</strong>,  - The server that your database is located on<br>'username'	=&gt;<strong>	'db_user'</strong>,  - The user name to be used when connecting to the database<br>'password'	=&gt;<strong>	'password'</strong>,  - The password to be used to connect<br>'dbname'	=&gt;<strong>	'poi_db'</strong>,  - The name of the database to be used<br>'tablename'	=&gt;<strong>	'poi'</strong>  -  The table that holds the POI information</pre>
+  <p>You will also need to define the fields in the database to be used by editing db/db.config.php
+    file (more info on the field and their structure below):</p>
+  <pre>'latitude'	=&gt; <strong>'lat'</strong>, - The field in your table that has the points latitude<br>'longitude'	=&gt; <strong>'lng'</strong>, - The field in your table that has the points latitude<br>'title'		=&gt; <strong>'title'</strong>, - The field in your table that has the main title of the popup window<br>'address'	=&gt;	<strong>'address'</strong>, - The field that holds the POI's address<br>'url'		=&gt; <strong>'url'</strong>, - The field that has the URL that you want the title to link to <br>'html'		=&gt; <strong>'html'</strong>, - The field that contains the HTML to be used in the popup<br>'category'	=&gt; <strong>'category'</strong>, - The field that contains the category for the point. Also defines the default marker.<br>'icon'		=&gt; <strong>'marker'</strong> - The field that contains the costom marker value.
+  </pre>
+  <h4 id="dbstructure">8.2 - Database Structure</h4>
+  <p> You can use an existing database / tanble or can create a new one just
+    for POI's. Either way, the table that you use must contain the following
+    fields:</p>
+  <table width="824" border="1">
+    <tr>
+      <th width="60" scope="col">Field</th>
+      <th width="63" scope="col">Type</th>
+      <th width="68" scope="col">Length</th>
+      <th width="68" scope="col">Decimal</th>
+      <th width="531" scope="col">Information</th>
+    </tr>
+    <tr>
+      <td>latitude</td>
+      <td>float</td>
+      <td>15</td>
+      <td>10</td>
+      <td>The latitude of your Point of Interest - required for the point to
+        be shown</td>
+    </tr>
+    <tr>
+      <td>longitude</td>
+      <td>float</td>
+      <td>15</td>
+      <td>10</td>
+      <td>The longitude of your Point of Interest - required for the point to
+        be shown</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The text shown as the title in the marker's popup - may be left blank.</td>
+    </tr>
+    <tr>
+      <td>address</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The Location's address - may be left blank</td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The url that the title links to - may be left blank or '#'</td>
+    </tr>
+    <tr>
+      <td>html</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The html to be shown in the popup window - may be left blank</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The category that this point belongs to. Also used as the default icon
+        for the group - required for the point to be shown</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td>text</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>The filename (minus the png extensions) in the icons directory to be
+        used for this marker only - leave blank to use the category marker</td>
+    </tr>
+  </table>
+  <h4 id="dbhtml">8.3 Category HTML</h4>
+  <p>To define a category to be sourced from your database, you need to add a
+    category to the poiList. eg</p>
+  <pre>      &lt;li data-title=&quot;db:property&quot; id=&quot;property&quot;&gt;Property For Sale&lt;/li&gt;
+  </pre>
+  <p>This tells POI Auto Map to search the database for all markers in the currently
+    viewed map bounds for records with property as the category</p>
+  <p>You must have a corresponding <strong>category.png</strong> file in the
+    icons directory or be using a custom marker as defined in the icon .eg for
+    the example above, you would provide a property.png file in the icons directory.</p>
+  <p>You can also add a <strong><em>category-shadow.png</em></strong> file in
+    the icons directory. eg for the example above, you would provide a property-shadow.png
+    file in the icons directory.</p>
+  <p>You need to define the size and anchor of the icons used in the javascript
+    config. All marker icons must be the same size.</p>
+  <h4></h4>
+  <h4 id="geo">8.4 Batch Geocoding</h4>
+  <p>POI Auto List provides an aditional tool to retrive the latitude and longitude
+    of all database records that do not currently have one set. Without a latitide
+    and longitude, the point will not be shown.</p>
+  <p>Once you have completed you database configuration, you can open the db/geo.php
+    file. This will search for all records without a latitude set and update
+    it accordingly. There may be some cases where the batch geocoder cannot resolve
+    the address. In this case, you will be shown which records fail and you should check
+    the addresses and either simplify them, or enter manually.</p>
+  <p>The Batch geocoder uses the Google geocoding service. This service allows
+    you to geocode somewhere between 2500 and 15000 addresses per day. If you
+    need to do more than that, you will need to continue over a number of days or
+    use some other method.</p>
+  <p>&nbsp;</p>
+  <h4 id="csv">8.4 Importing / Exporting Data</h4>
+  <p>You now have the ability to update your poi database by uploading a csv file with your data. The import utility can be found <a href="db/export.php">here</a></p>
+  <hr>
+  <p></p>
+  <p>Once again, thank you so much for purchasing this script. As I said at the
+    beginning, I'd be glad to help you if you have any questions relating to
+    this script. No guarantees, but I'll do my best to assist. If you have a
+    more general question relating to the scripts on CodeCanyon, you might consider
+    visiting the forums and asking your question in the "Item Discussion" section.</p>
+  <p class="append-bottom alt large"><strong>Gavin Smith - Teeplates.com</strong></p>
+  <p><a href="#toc">Go To Table of Contents</a></p>
+  <hr class="space">
+</div>
+<!-- end div .container -->
+</body>
+</html>
